@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Santé - Produits Tasly</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles généraux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header et Navigation améliorée avec onglets */
+        header {
+            background-color: #2e7d32;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: #ffeb3b;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            background-color: #1b5e20;
+            border-radius: 30px;
+            padding: 5px;
+        }
+        
+        .nav-links li {
+            margin: 0 5px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: block;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            background-color: #ffeb3b;
+            color: #2e7d32;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+        }
+        
+        /* Sections générales */
+        section {
+            padding: 60px 0;
+            display: none;
+        }
+        
+        section.active {
+            display: block;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2e7d32;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #2e7d32;
+            margin: 15px auto;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #2e7d32;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #1b5e20;
+            transform: translateY(-3px);
+        }
+        
+        .btn-details {
+            background-color: #ff9800;
+            margin-top: 10px;
+        }
+        
+        .btn-details:hover {
+            background-color: #f57c00;
+        }
+        
+        /* Section Produits avec image de fond */
+        #products {
+            background: linear-gradient(rgba(208, 235, 238, 0.9), rgba(43, 54, 54, 0.9)), url('nature.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            
+        }
+        
+        /* Produits */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-img {
+            height: 200px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .product-img img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+        
+        .product-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #2e7d32;
+        }
+        
+        .product-price {
+            font-weight: bold;
+            color: #e91e63;
+            margin-bottom: 15px;
+        }
+        
+        .product-description-short {
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        
+        /* Page détail produit */
+        .product-detail {
+            display: none;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        .product-detail.active {
+            display: block;
+        }
+        
+        .product-header {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .product-gallery {
+            position: relative;
+        }
+        
+        .product-gallery img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        
+        .product-main-info h2 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+        
+        .product-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .stars {
+            color: #ffc107;
+            margin-right: 10px;
+        }
+        
+        .product-price-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .current-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e91e63;
+            margin-right: 15px;
+        }
+        
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+        }
+        
+        .availability {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .product-description {
+            margin-bottom: 30px;
+        }
+        
+        .related-products {
+            margin-top: 50px;
+        }
+        
+        .related-products h3 {
+            margin-bottom: 20px;
+            color: #2e7d32;
+        }
+        
+        /* Services */
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .service-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            font-size: 40px;
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+        
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .about-text {
+            text-align: justify;
+        }
+        
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Contact */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #2e7d32;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2e7d32;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #ffeb3b;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #ffeb3b;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: transform 0.3s;
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+        
+        /* Back button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 20px;
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .back-button i {
+            margin-right: 5px;
+        }
+        
+        /* Style pour la navigation par onglets */
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .product-header {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                background-color: #2e7d32;
+                width: 80%;
+                height: calc(100vh - 70px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: right 0.3s;
+                gap: 30px;
+                border-radius: 0;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .hamburger {
+                display: block;
+                color: white;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .nav-links a {
+                padding: 15px 30px;
+            }
+            
+            /* Ajustement pour l'arrière-plan sur mobile */
+            #products {
+                background-attachment: scroll;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation améliorée avec onglets -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>Nature santé</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#accueil" class="active" data-tab="accueil">Accueil</a></li>
+                    <li><a href="#about" data-tab="about">Qui sommes-nous</a></li>
+                    <li><a href="#products" data-tab="products">Nos produits</a></li>
+                    <li><a href="#services" data-tab="services">Nos services</a></li>
+                    <li><a href="#contact" data-tab="contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenu principal avec onglets -->
+    <main>
+        <!-- Section Accueil -->
+        <section id="accueil" class="active">
+            <!-- Hero Section -->
+            <div class="hero">
+                <div class="container">
+                    <h1>Bienvenue chez Nature Santé</h1>
+                    <p>Découvrez les bienfaits des produits Tasly pour votre santé et votre bien-être au naturel.</p>
+                    <a href="#products" class="btn" data-tab="products">Découvrir nos produits</a>
+                </div>
+            </div>
+
+            <!-- Featured Products -->
+            <div class="container">
+                <h2 class="section-title">Produits Phares</h2>
+                <div class="products-grid">
+                    <!-- Produit 1 -->
+                    <div class="product-card" data-product="cerebralcare">
+                        <div class="product-img">
+                            <img src="CEREBRALCARE.png" alt="Cerebral Care">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Cerebral Care</h3>
+                            <p class="product-description-short">Excellent pour soulager plusieurs types de mal de tête et améliorer la circulation cérébrale.</p>
+                            <p class="product-price">15.800 FCFA</p>
+                            <button class="btn btn-details">En savoir plus</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Produit 2 -->
+                    <div class="product-card" data-product="icp">
+                        <div class="product-img">
+                            <img src="ICP.png" alt="ICP">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">ICP</h3>
+                            <p class="product-description-short">Réactive la micro circulation et prévient les maladies coronariennes.</p>
+                            <p class="product-price">18.720 FCFA</p>
+                            <button class="btn btn-details">En savoir more</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Produit 3 -->
+                    <div class="product-card" data-product="cordyceps">
+                        <div class="product-img">
+                            <img src="CORDYCEPS_CAPSULE.png" alt="Cordyceps Capsule">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Cordyceps Capsule</h3>
+                            <p class="product-description-short">Efficace pour les maladies respiratoires et cardiovasculaires.</p>
+                            <p class="product-price">19.440 FCFA</p>
+                            <button class="btn btn-details">En savoir plus</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Produit 4 -->
+                    <div class="product-card" data-product="a1">
+                        <div class="product-img">
+                            <img src="A1_CAPSULE.png" alt="A1 Capsule">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">A1 Capsule</h3>
+                            <p class="product-description-short">Accroît les lymphocytes TCD4 et renforce le système immunitaire.</p>
+                            <p class="product-price">43.200 FCFA</p>
+                            <button class="btn btn-details">En savoir plus</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section About -->
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">Qui Sommes-Nous</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Nature Sature est une entreprise dévouée à votre bien-être, spécialisée dans la distribution de produits naturels de haute qualité de la marque Tasly.</p>
+                        <p>Notre mission est de rendre accessible à tous les bienfaits de la médecine traditionnelle chinoise combinée aux avancées de la science moderne.</p>
+                        <p>Nous nous engageons à fournir des produits authentiques, testés et approuvés, pour accompagner nos clients vers une santé optimale.</p>
+                        <p>Notre équipe de professionnels passionnés vous conseille et vous guide dans le choix des produits les plus adaptés à vos besoins.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Équipe Nature Sature">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Products -->
+        <section id="products">
+            <div class="container">
+                <h2 class="section-title">Tous Nos Produits</h2>
+                <div class="products-grid">
+                    <!-- Les produits seront ajoutés dynamiquement par JavaScript -->
+                </div>
+            </div>
+
+            <!-- Product Detail Section -->
+            <div id="product-detail-section">
+                <div class="container">
+                    <!-- Détail du produit (sera affiché dynamiquement) -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Services -->
+        <section id="services">
+            <div class="container">
+                <h2 class="section-title">Nos Services</h2>
+                <div class="services-container">
+                    <div class="service-box">
+                        <div class="service-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h3>Consultations</h3>
+                        <p>Bénéficiez de consultations personnalisées avec nos experts en médecine naturelle pour identifier les solutions adaptées à vos besoins.</p>
+                    </div>
+                    
+                    <div class="service-box">
+                        <div class="service-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3>Accompagnement</h3>
+                        <p>Un suivi personnalisé tout au long de votre traitement pour maximiser les résultats et répondre à toutes vos questions.</p>
+                    </div>
+                    
+                    <div class="service-box">
+                        <div class="service-icon">
+                            <i class="fas fa-spa"></i>
+                        </div>
+                        <h3>Massages Corporels</h3>
+                        <p>Détendez-vous avec nos massages thérapeutiques qui combinent techniques traditionnelles et produits naturels pour un bien-être optimal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Contact -->
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title">Contact</h2>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h3>Téléphone</h3>
+                                <p>01 47 78 31 63 (Appel/WhatsApp)</p>
+                                <p>01 66 99 28 28  (Appel/WhatsApp)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h3>Email</h3>
+                                <p>naturesante346@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h3>Adresse</h3>
+                                <p>Nature Santé, Votre adresse ici</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h3>Horaires</h3>
+                                <p>Lun - Ven: 8h - 18h<br>Sam: 9h - 16h</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Nom complet</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Téléphone</label>
+                                <input type="tel" id="phone">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn">Envoyer le message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Nature Santé</h3>
+                    <p>Votre partenaire santé naturel pour une vie équilibrée et épanouie.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Liens rapides</h3>
+                    <ul>
+                        <li><a href="#accueil" data-tab="accueil">Accueil</a></li>
+                        <li><a href="#about" data-tab="about">Qui sommes-nous</a></li>
+                        <li><a href="#products" data-tab="products">Nos produits</a></li>
+                        <li><a href="#services" data-tab="services">Nos services</a></li>
+                        <li><a href="#contact" data-tab="contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Suivez-nous</h3>
+                    <p>Restez connecté sur nos réseaux sociaux</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Nature Santé. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/+2290147783163" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Données des produits
+        const products = [
+            {
+                id: "cerebralcare",
+                name: "TASLY : KASLY CÉRÉBRALCARE",
+                image: "CEREBRALCARE.png",
+                shortDesc: "Excellent pour soulager plusieurs types de mal de tête et améliorer la circulation cérébrale.",
+                price: "15.800 FCFA",
+                oldPrice: "17.800 FCFA",
+                rating: { stars: 4.5, count: 102 },
+                availability: "DISPONIBLE",
+                description: "Excellent pour soulager plusieurs types de mal de tête; la migraine; le stress; les cephalées hypertensives. Efficace contre les symptômes de la ménopause. Ameliore la micro circulation du sang dans le cerveau. Prévient et traitement efficacement AVC. OXYGÈNE le cerveau."
+            },
+            {
+                id: "icp",
+                name: "TASLY : KASLY ICP",
+                image: "ICP.png",
+                shortDesc: "Réactive la micro circulation et prévient les maladies coronariennes.",
+                price: "18.720 FCFA",
+                oldPrice: "19.500 FCFA",
+                rating: { stars: 4.8, count: 452 },
+                availability: "DISPONIBLE",
+                description: "Réactive la micro circulation. Prévient et traite les maladies coronariennes. Traite efficacement l'accident cérébrale vasculaire (AVC). Equilibre le taux de cholestérol (HDL/LDL). Empêche la thrombose (les caillots dans le sang). Elimine la plaque d'artériosclérose. Traite efficacement l'hypertension artérielle. Participe à la reconstruction des organes. Soulage de la douleur. Réduit le stress. Traite l'angine de poitrine(douleur de poitrine d'origine Vasculaire)."
+            },
+            {
+                id: "cordyceps",
+                name: "TASLY : KASLY CORDYCEPS CAPSULE",
+                image: "CORDYCEPS_CAPSULE.png",
+                shortDesc: "Efficace pour les maladies respiratoires et cardiovasculaires.",
+                price: "19.440 FCFA",
+                oldPrice: "21.350 FCFA",
+                rating: { stars: 4.7, count: 241 },
+                availability: "DISPONIBLE",
+                description: "Efficace pour les Malades et les maladies Respiratoires et cardiovasculaires. Prévient des cancers, Traite L'hépatite et la Cirrhose du foie; Améliore le système Immunitaire; Traite l'insuffisance rénale; Efficace pour l'activité Physique; Renforce le libido( rapport sexuelle); Améliore et régule les fonctions pulmonaires et physiologiques du Rein; un anti douleur, antioxydants."
+            },
+            {
+                id: "phytoestrogen",
+                name: "TASLY : KASLY PHYTOESTROGEN TABLET",
+                image: "PHYTOESTROGEN_TABLET.png",
+                shortDesc: "Prévient et traite les symptômes liés à la ménopause.",
+                price: "17.300 FCFA",
+                oldPrice: "19.900 FCFA",
+                rating: { stars: 4.2, count: 41 },
+                availability: "DISPONIBLE",
+                description: "Prévient et traite les symptômes liés à la ménopause; L'irrégularité des menstruations; Augmente la sécrétion vaginale. Traite les règles douloureuses et règle le déséquilibre des hormones chez la femme. Prévient des maladies du cœur; l'ostéoporose. Retarde le vieillissement. Fortifie les os. Traite la sécheresse vaginale."
+            },
+            {
+                id: "ginseng",
+                name: "TASLY : KASLY GINSENG RH2",
+                image: "KING_S_CAPSULE_ATASLY.png",
+                shortDesc: "Arrête la prolifération des métastases et réduit les effets secondaires des traitements contre le cancer.",
+                price: "41.750 FCFA",
+                oldPrice: "47.000 FCFA",
+                rating: { stars: 4.6, count: 103 },
+                availability: "DISPONIBLE",
+                description: "Arrête la prolifération des métastases (particules de cellules cancéreuses dans d'autres tissus et réduit les effets secondaires dus à la radiothérapie et la chimio therapie. Augmente les globules rouges et blancs du sang. Améliore la fonction d'immunité. Très efficace pour les cancers de forme accélérée. Traite jusqu'à 52 types de cancer."
+            },
+            {
+                id: "a1",
+                name: "TASLY : KASLY A1 CAPSULE",
+                image: "A1_CAPSULE.png",
+                shortDesc: "Accroît les lymphocytes TCD4 et renforce le système immunitaire.",
+                price: "43.200 FCFA",
+                oldPrice: "46.300 FCFA",
+                rating: { stars: 4.5, count: 104 },
+                availability: "DISPONIBLE",
+                description: "Accroît les lymphocytes TCD4 de l'organisme. Stabilise la progression du VIH chez le malade du sida. Efficace dans le traitement des maladies opportunistes du VIH-SIDA. Renforce le système Immunitaire. Traite l'insuffisance rénale Efficace pour l'activité Physique. Traite effectivement la leucémie ( cancer du sang). Soulage de Asthme."
+            },
+            {
+                id: "kings",
+                name: "TASLY : KASLY KING'S CAPSULE ATASLY",
+                image: "KING_S_CAPSULE_ATASLY.png",
+                shortDesc: "Traite l'impuissance et les faiblesses sexuelles.",
+                price: "24.700 FCFA",
+                oldPrice: "32.300 FCFA",
+                rating: { stars: 4.4, count: 102 },
+                availability: "DISPONIBLE",
+                description: "Traite l'impuissance et les faiblesses sexuelles; l' azoospermie; la mobilité des spermatozoides. Traite l'infertilité; l'éjaculation précoce. Améliore la qualité de la vie sexuelle."
+            },
+            {
+                id: "redyeast",
+                name: "TASLY : KASLY RED YEAST TABLET",
+                image: "RED_YEAST_TABLET.png",
+                shortDesc: "Ajuste rapidement et efficacement le niveau des lipides du Sang.",
+                price: "16.560 FCFA",
+                oldPrice: "19.700 FCFA",
+                rating: { stars: 4.3, count: 88 },
+                availability: "DISPONIBLE",
+                description: "Ajuste rapidement et efficacement le niveau des lipides du Sang. Prévient et traite plusieurs types d' hyperlipidémie l'artériosclérose et l'apoplexie( cholestérol HDL ET LDL et graisses). Accélère la récupération du corps. Efficace pour les personnes âges. Aide à prévenir les maladies cardiovasculaires cérébrales."
+            },
+            {
+                id: "propolissirop",
+                name: "TASLY : KASLY PROPOLIS SIROP",
+                image: "PROPOLIS_SIROP.png",
+                shortDesc: "Préviens des infections et diminue les Inflammations.",
+                price: "19.080 FCFA",
+                oldPrice: "22.700 FCFA",
+                rating: { stars: 4.5, count: 114 },
+                availability: "DISPONIBLE",
+                description: "Préviens des infections et diminue les Inflammations; Efficace contre les blessures et les brûlures. Traite les infections respiratoires ( la toux ,bronchite, asthme, Tuberculose, l'obstruction nasale). Traite efficacement l'ulcère gastrique. Efficace pour les maux de tête; la fièvre et les inflammations de la gorge. Efficace pour la Guérison des plaies;les lésions cutanées et protège la peau."
+            },
+            {
+                id: "propolisganoderma",
+                name: "TASLY : KASLY PROPOLIS & GLOSSY GANODERMA CAPSULE",
+                image: "PROPOLIS_GLOSSY_GANODERMA_CAPSULE.png",
+                shortDesc: "Efficace pour la réactivation du système immunitaire naturel.",
+                price: "11.820 FCFA",
+                oldPrice: "13.600 FCFA",
+                rating: { stars: 4.4, count: 95 },
+                availability: "DISPONIBLE",
+                description: "Efficace pour la réactivation du système immunitaire naturel. Augmente la capacité de résistance de l'organisme aux cancers. Évite les effets secondaires de la chimiothérapie dans le traitement du cancer Efficace dans le traitement du cancer de la peau. Aide à prévenir les tumeurs; retard le vieillissement , un anti douleur."
+            },
+            {
+                id: "propolissoftgel",
+                name: "TASLY : KASLY PROPOLIS SOFTGEL CAPSULE",
+                image: "PROPOLIS_SOFTGEL_CAPSULE.png",
+                shortDesc: "Ameliore l'élasticité des vaiseaux sanguins et des capillaires.",
+                price: "14.760 FCFA",
+                oldPrice: "16.800 FCFA",
+                rating: { stars: 4.2, count: 78 },
+                availability: "DISPONIBLE",
+                description: "Ameliore l'élasticité des vaiseaux sanguins et des capillaires. Diminue la viscosité du sang, le taux de cholesterol et de sucre dans le sang. Améliore le rendement des Anticorps . Traite efficacement hypotension artérielle Traite également la diarrhée, les maladies de la peau et de foie."
+            },
+            {
+                id: "propolispollen",
+                name: "TASLY : KASLY PROPOLIS & WATER LILY POLLEN CAPSULE",
+                image: "PROPOLIS_WATER_LILY_POLLEN_CAPSULE.png",
+                shortDesc: "Normalise le systéme endocrinien de l'organisme.",
+                price: "11.550 FCFA",
+                oldPrice: "13.100 FCFA",
+                rating: { stars: 4.6, count: 117 },
+                availability: "DISPONIBLE",
+                description: "Normalise le systéme endocrinien de l'organisme. Améliore l'irrigation de la peau en sang. Privient et traite le cancer de la peau. Traite la prostatite, Protège le foie. Améliore la vut, soulage de la constipation et rend le teint éclatant. Efficace pour les infections urinaires, aide à renforcer le libido (rapport sexuel)."
+            },
+            {
+                id: "royaljelly",
+                name: "TASLY : KASLY ROYAL JELLY CAPSULE",
+                image: "ROYAL_JELLY_CAPSULE.png",
+                shortDesc: "Enrichit le cerveau et renforce la mémore.",
+                price: "17.000 FCFA",
+                oldPrice: "18.420 FCFA",
+                rating: { stars: 4.5, count: 98 },
+                availability: "DISPONIBLE",
+                description: "Enrichit le cerveau et renforce la mémore. Rehausse le système immunitaire. Complément nutritionnel. Fortifie, atténue la fatigue Nourrit la peau, la protège et la rend plus éclatante. Améliore la qualité du sommeil."
+            },
+            {
+                id: "danshentea",
+                name: "TASLY : KASLY DANSHEN TEA",
+                image: "CAMELLIA_BEE_POLLEN_TEA.png",
+                shortDesc: "Prévient et traite les maladies cardio vasculares, Cérebrovasculaires.",
+                price: "10.000 FCFA",
+                oldPrice: "14.100 FCFA",
+                rating: { stars: 4.5, count: 102 },
+                availability: "DISPONIBLE",
+                description: "Prévient et traite les maladies cardio vasculares, Cérebrovasculaires, le cholestérol, le diabète. Réduit le taux de graisse. Améliore la circulation du sang, la prise d'oxygène du muscle cardiaque. Ralentit la thrombose. Aide les fumeurs et personnes exposées aux radiations."
+            },
+            {
+                id: "cenforte",
+                name: "TASLY : KASLY CEN FORTE TABLET",
+                image: "CEN_FORTE_TABLET.png",
+                shortDesc: "Complément alimentaire pour améliorer la circulation sanguine.",
+                price: "19.000 FCFA",
+                oldPrice: "23.000 FCFA",
+                rating: { stars: 4.3, count: 87 },
+                availability: "DISPONIBLE",
+                description: "Complément alimentaire pour améliorer la circulation sanguine. Aide à réduire l'absorption des graisses et favorise la perte de poids. Antioxydant puissant pour la santé cardiaque et l'énergie cellulaire."
+            },
+            {
+                id: "KASLY_TONGBI_CAPSULE",
+                name: "TASLY : KASLY TONGBI CAPSULE",
+                image: "KASLY_TONGBI_CAPSULE.png",
+                shortDesc: "Complément alimentaire pour améliorer la circulation sanguine.",
+                price: "27.400 FCFA",
+                oldPrice: "30.000 FCFA",
+                rating: { stars: 4.3, count: 87 },
+                availability: "DISPONIBLE",
+                description: "Complément alimentaire pour améliorer la circulation sanguine. Aide à traiter l'hernie discale,arthroses polyarthrie, soulage les douleurs rhumatismales... aide à eviter les crises de la drepanosytose, la nevralgie et les douleurs musculaires de tout types."
+            },
+            {
+                id: "KASLY_FEMATE",
+                name: "TASLY : KASLY FEMATE",
+                image: "KASLY_FEMATE.png",
+                shortDesc: "Complément alimentaire pour améliorer la circulation sanguine.",
+                price: "21.600 FCFA",
+                oldPrice: "27.000 FCFA",
+                rating: { stars: 4.3, count: 87 },
+                availability: "DISPONIBLE",
+                description: "Complément alimentaire pour améliorer la circulation sanguine et la microcirculation. Aide à diminuer l'inflamation, regule la secretion interne, renforce l'immunite, ajuste les cellules musculaires lisses, soulage également la douleur, inhibe la croissance des cellulestumorales,supprime la stase sanguine(menstruation,infection pelvienne,hyperlasie mammaire, fibrome, lochies après accouchement) traite les fibromes,myomes et kystes."
+            },
+            {
+                id: "Tong_Luo_Capsule",
+                name: "TASLY : TONG LUO CAPSULE",
+                image: "Tong_Luo_Capsule.png",
+                shortDesc: "Complément alimentaire pour améliorer la circulation sanguine.",
+                price: "19.000 FCFA",
+                oldPrice: "23.000 FCFA",
+                rating: { stars: 4.3, count: 87 },
+                availability: "DISPONIBLE",
+                description: "Complément alimentaire pour améliorer la circulation sanguine. Stabilise la plaque, évite la rupture des vaisseaux et previent ainsi la survenue d'un AVC, bénéfique pour les personnes souffrant de troubles cognitifs d'hypertension artérielle et d'accident vasculaire cérébral, ralentit le processus de vieillissement et améliore la qualité de vie."
+            },
+             {
+                id: "Citrus_Sour_Tablet",
+                name: "TASLY : Citrus_Sour_Tablet",
+                image: "Citrus_Sour_Tablet.png",
+                shortDesc: "Complément alimentaire pour améliorer la circulation sanguine.",
+                price: "12.960 FCFA",
+                oldPrice: "15.000 FCFA",
+                rating: { stars: 4.3, count: 87 },
+                availability: "DISPONIBLE",
+                description: "Complément alimentaire pour améliorer la circulation sanguine. Améliore la santé du foie et de l'ensemble du corps, lutte contre l'intoxication alimentaire et très efficace contre toutes les formes d'hépatite et la cirrhose."
+            },
+            {
+                id: "I Cleansing_Capsule",
+                name: "TASLY : I Cleansing_Capsule",
+                image: "I Cleansing_Capsule.png",
+                shortDesc: "Complément alimentaire pour améliorer la circulation sanguine.",
+                price: "9.750 FCFA",
+                oldPrice: "12.000 FCFA",
+                rating: { stars: 4.3, count: 87 },
+                availability: "DISPONIBLE",
+                description: "Complément alimentaire pour améliorer la circulation sanguine. Soulage la constipation, améliore la microcirculation de l'intestin, élimine les déchets solides retenus des intestins. Il aide également à éliminer les selles facilement, évite les selles dures, prévient les hémoroides, un excellent déparasitant."
+            },
+        ];
+
+        // Menu mobile
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Navigation par onglets
+        const tabLinks = document.querySelectorAll('[data-tab]');
+        
+        tabLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Désactiver tous les onglets
+                tabLinks.forEach(l => l.classList.remove('active'));
+                document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+                
+                // Activer l'onglet cliqué
+                link.classList.add('active');
+                const tabId = link.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+                
+                // Fermer le menu mobile si ouvert
+                navLinks.classList.remove('active');
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+        
+        // Formulaire de contact
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Merci pour votre message! Nous vous contacterons bientôt.');
+            this.reset();
+        });
+        
+        // Afficher les produits dans la grille
+        const productsContainer = document.querySelector('#products .products-grid');
+        
+        products.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.className = 'product-card';
+            productCard.setAttribute('data-product', product.id);
+            productCard.innerHTML = `
+                <div class="product-img">
+                    <img src="${product.image}" alt="${product.name}">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">${product.name.split(':')[1].trim()}</h3>
+                    <p class="product-description-short">${product.shortDesc}</p>
+                    <p class="product-price">${product.price}</p>
+                    <button class="btn btn-details">En savoir plus</button>
+                </div>
+            `;
+            productsContainer.appendChild(productCard);
+        });
+        
+        // Gérer l'affichage des détails du produit
+        const productDetailSection = document.querySelector('#product-detail-section .container');
+        const productsSection = document.getElementById('products');
+        
+        // Fonction pour générer les étoiles de notation
+        function generateStars(rating) {
+            let starsHTML = '';
+            const fullStars = Math.floor(rating.stars);
+            const hasHalfStar = rating.stars % 1 !== 0;
+            
+            for (let i = 0; i < fullStars; i++) {
+                starsHTML += '<i class="fas fa-star"></i>';
+            }
+            
+            if (hasHalfStar) {
+                starsHTML += '<i class="fas fa-star-half-alt"></i>';
+            }
+            
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            for (let i = 0; i < emptyStars; i++) {
+                starsHTML += '<i class="far fa-star"></i>';
+            }
+            
+            return starsHTML;
+        }
+        
+        // Fonction pour afficher les détails du produit
+        function showProductDetail(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Masquer la liste des produits
+            document.querySelector('#products .products-grid').style.display = 'none';
+            document.querySelector('#products .section-title').style.display = 'none';
+            
+            // Afficher la section de détail
+            productDetailSection.innerHTML = `
+                <a class="back-button" onclick="showProductList()">
+                    <i class="fas fa-arrow-left"></i> Retour aux produits
+                </a>
+                <div class="product-detail active">
+                    <div class="product-header">
+                        <div class="product-gallery">
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
+                        <div class="product-main-info">
+                            <h2>${product.name}</h2>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    ${generateStars(product.rating)}
+                                </div>
+                                <span>(${product.rating.count} Avis)</span>
+                            </div>
+                            <div class="product-price-detail">
+                                <span class="current-price">${product.price}</span>
+                                ${product.oldPrice ? `<span class="old-price">${product.oldPrice} FCFA</span>` : ''}
+                            </div>
+                            <div class="availability">${product.availability}</div>
+                            <p>${product.shortDesc}</p>
+                            <a href="https://wa.me/+2290147783163?text=Je souhaite commander le produit: ${encodeURIComponent(product.name)}" class="btn" target="_blank">ACHETER</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-description">
+                        <h3>DESCRIPTION</h3>
+                        <p>${product.description}</p>
+                    </div>
+                    
+                    <div class="related-products">
+                        <h3>Autres produits</h3>
+                        <div class="products-grid">
+                            ${getRandomProducts(productId).map(p => `
+                                <div class="product-card" data-product="${p.id}">
+                                    <div class="product-img">
+                                        <img src="${p.image}" alt="${p.name}">
+                                    </div>
+                                    <div class="product-info">
+                                        <h3 class="product-title">${p.name.split(':')[1].trim()}</h3>
+                                        <p class="product-description-short">${p.shortDesc}</p>
+                                        <p class="product-price">${p.price}</p>
+                                        <button class="btn btn-details">En savoir plus</button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Ajouter les écouteurs d'événements pour les produits apparentés
+            document.querySelectorAll('.related-products .btn-details').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productCard = e.target.closest('.product-card');
+                    const productId = productCard.getAttribute('data-product');
+                    showProductDetail(productId);
+                });
+            });
+            
+            // Scroll to the top of the product detail section
+            productDetailSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Fonction pour obtenir 4 produits aléatoires (hors produit actuel)
+        function getRandomProducts(currentProductId) {
+            const otherProducts = products.filter(p => p.id !== currentProductId);
+            const shuffled = otherProducts.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, 4);
+        }
+        
+        // Fonction pour revenir à la liste des produits
+        function showProductList() {
+            document.querySelector('#products .products-grid').style.display = 'grid';
+            document.querySelector('#products .section-title').style.display = 'block';
+            productDetailSection.innerHTML = '';
+            window.scrollTo({ top: productsSection.offsetTop, behavior: 'smooth' });
+        }
+        
+        // Ajouter les écouteurs d'événements pour les boutons "En savoir plus"
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn-details')) {
+                const productCard = e.target.closest('.product-card');
+                const productId = productCard.getAttribute('data-product');
+                showProductDetail(productId);
+            }
+        });
+        
+        // Initialiser la section de détail des produits comme vide
+        productDetailSection.innerHTML = '';
+    </script>
+</body>
+</html>
